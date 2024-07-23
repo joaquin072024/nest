@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { EventEmitterModule } from '@nestjs/event-emitter';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { TasksModule } from './tasks/tasks.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { typeORM } from './config/typeORM';
+import { RecidenceModule } from './recidence/recidence.module';
+import { UserModule } from './user/user.module';
 
 @Module({
-  imports: [EventEmitterModule.forRoot(), TasksModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [TypeOrmModule.forRoot(typeORM()), UserModule, RecidenceModule],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
