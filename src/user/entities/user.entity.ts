@@ -1,7 +1,12 @@
-import { Column, DeleteDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Car } from '../../car/entities/car.entity';
+import { Dates } from '../../dates/dates.entity';
+import { Language } from '../../language/entities/language.entity';
+import { Recidence } from '../../recidence/entities/recidence.entity';
+import { TypeUser } from '../../type_user/entities/type_user.entity';
 
 @Entity('user')
-export class User {
+export class User extends Dates {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -17,6 +22,15 @@ export class User {
   @Column('text')
   direccion: string;
 
-  @DeleteDateColumn()
-  delete_at: Date;
+  @ManyToOne(() => Recidence)
+  recidence: Recidence;
+
+  @ManyToOne(() => TypeUser)
+  type_user: TypeUser;
+
+  @ManyToOne(() => Language)
+  language: Language;
+
+  @ManyToOne(() => Car)
+  car: Car;
 }

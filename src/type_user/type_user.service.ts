@@ -1,26 +1,32 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateTypeUserDto } from './dto/create-type_user.dto';
 import { UpdateTypeUserDto } from './dto/update-type_user.dto';
+import { TypeUser } from './entities/type_user.entity';
 
 @Injectable()
 export class TypeUserService {
+  constructor(@InjectRepository(TypeUser) private readonly typeRepository: Repository<TypeUser>) {}
+
   create(createTypeUserDto: CreateTypeUserDto) {
-    return 'This action adds a new typeUser';
+    return this.typeRepository.save(createTypeUserDto);
   }
 
   findAll() {
-    return `This action returns all typeUser`;
+    return this.typeRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} typeUser`;
+  findOne(id: string) {
+    return this.typeRepository.findOne({ where: { id: id } });
   }
 
-  update(id: number, updateTypeUserDto: UpdateTypeUserDto) {
-    return `This action updates a #${id} typeUser`;
+  update(id: string, updateTypeUserDto: UpdateTypeUserDto) {
+    return this.typeRepository.update({ id: id }, updateTypeUserDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} typeUser`;
+  async remove(id: string) {
+    const data = await this.typeRepository.findOne({ where: { id: id } });
+    return this.typeRepository.softRemove(data);
   }
 }

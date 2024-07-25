@@ -9,4 +9,8 @@ export class CreateRecidenceDto {
 
   @IsString()
   localidad: string;
+
+  create_at: Date;
+
+  delete_at: Date;
 }

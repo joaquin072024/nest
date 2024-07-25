@@ -71,3 +71,11 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+1. Debemos normalizar los datos que están en Excel.
+
+2. Debemos crear un CRUD para realizar alta, listado, baja y modificación de registros.
+
+3. Las entidades deberían tener el campo “creado a las” y “borrado a las”.
+
+4. No usemos “delete” ni “remove”, usemos “soft-delete” o ”soft-remove”.
